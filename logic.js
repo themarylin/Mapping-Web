@@ -5,22 +5,17 @@ function markerSize(magnitude) {
 
 function markerColor(magnitude) {
   if (magnitude > 5) {
-    return "red";
-  }
-  else if (magnitude > 4) {
-    return "orange";
-  }
-  else if (magnitude > 3) {
-    return "gold";
-  }
-  else if (magnitude > 2) {
-    return "yellow";
-  }
-  else if (magnitude > 1) {
+    return "Red";
+  } else if (magnitude > 4) {
+    return "Orange";
+  } else if (magnitude > 3) {
+    return "Yellow";
+  } else if (magnitude > 2) {
     return "GreenYellow";
-  }
-  else {
-    return "green";
+  } else if (magnitude > 1) {
+    return "Green";
+  } else {
+    return "MediumSeaGreen";
   }
 }
 
@@ -28,7 +23,7 @@ function markerColor(magnitude) {
 d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson", function (data) {
   var places = data.features.map(d => d.properties.place);
   var mags = data.features.map(d => d.properties.mag);
-  var locations = data.features.map(d => [d.geometry.coordinates[1],d.geometry.coordinates[0]]);
+  var locations = data.features.map(d => [d.geometry.coordinates[1], d.geometry.coordinates[0]]);
   //console.log(locations);
   // Define arrays to hold created markers for earthquakes
   var cityMarkers = [];
@@ -46,12 +41,12 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
     )
   };
 
-  console.log(cityMarkers);
+  // console.log(cityMarkers);
 
   // Define variables for our base layers
   var lightmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-    maxZoom: 18,
+    maxZoom: 5,
     id: "mapbox.light",
     accessToken: API_KEY
   });
